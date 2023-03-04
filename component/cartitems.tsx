@@ -1,34 +1,31 @@
 "use client";
+import { useSelector, useDispatch } from "react-redux";
+import { remove, cart } from "@/GlobalRedux/Features/cartSlice";
 
-import items from "@/data/items.json";
-import { useShoppingCart } from "@/context/ShoppingCartContext";
+export default function CartItems() {
+  const itemsInCart = useSelector(cart);
+  const dispatch = useDispatch();
 
-type ItemProps = {
-  id: number;
-  quantity: number;
-};
-
-export default function CartItems({ id, quantity }: ItemProps) {
-  const { removeFromCart } = useShoppingCart();
-
-  const stuff = items.find((item) => (id === item.id ? id : null));
+  console.log(itemsInCart);
 
   return (
-    <article className="flex gap-2 items-center">
-      <img
-        src={stuff?.imgUrl}
-        alt={stuff?.name}
-        className="w-24 h-24 object-cover"
-      />
-      <p>Name: {stuff?.name}</p>
-      <p>Price:{stuff?.price}</p>
-      <p>Quantity: {quantity}</p>
-      <button
-        className="bg-slate-700 text-slate-100 px-4 py-2"
-        onClick={() => removeFromCart(stuff!.id)}
-      >
-        remove
-      </button>
-    </article>
+    <div>
+      {itemsInCart.map((c) => {
+        return (
+          <article key={c.price} className="flex gap-2 items-center">
+            <img src={c.img} alt={c.name} className="w-24 h-24 object-cover" />
+            <p>Name: {c.name}</p>
+            <p>Price:{c.price}</p>
+            <p>Quantity: {c.quantity}</p>
+            <button
+              onClick={() => dispatch(remove({ name: c.name }))}
+              className="bg-slate-700 text-slate-100 px-4 py-2"
+            >
+              remove
+            </button>
+          </article>
+        );
+      })}
+    </div>
   );
 }

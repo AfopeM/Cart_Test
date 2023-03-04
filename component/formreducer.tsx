@@ -1,8 +1,6 @@
 "use client";
 import React, { useReducer } from "react";
 
-// type Form = [{ email: string; valid: boolean | undefined }];
-// const INITIAL_STATE = [{ email: "", valid: undefined }];
 const INITIAL_STATE = {
   email: { value: "", valid: undefined },
   cardNumber: { value: "", valid: undefined },
@@ -85,6 +83,7 @@ export default function FormReducer() {
     if (inputType == "cardNumber") {
       const cardRegex = /^[0-9]{4}\s([0-9]{4}\s){2}[0-9]{4}/;
       valid = cardRegex.test(state.cardNumber.value);
+      //   const c = state.cardNumber.value.split(" ").join("");
     }
 
     dispatch({

@@ -1,10 +1,8 @@
 import Link from "next/link";
-import { Navbar } from "@/component";
 
 export default function Home() {
   return (
     <>
-      {/* <Navbar /> */}
       <main className="flex flex-col w-full items-center gap-4 sm:flex-row py-12 ">
         <section className="flex-[2] text-center sm:text-left px-4">
           <h1 className="text-3xl font-black uppercase">Visit planets</h1>

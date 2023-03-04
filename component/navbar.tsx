@@ -1,8 +1,12 @@
+"use client";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { cart } from "@/GlobalRedux/Features/cartSlice";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
+  const cartSize = useSelector(cart).reduce((acc, c) => acc + c.quantity, 0);
   const route = [
     { name: "Home", path: "/" },
     { name: "Showcase", path: "/showcase" },
@@ -24,9 +28,13 @@ export default function Navbar() {
       </ul>
 
       <Link rel="stylesheet" className="w-8 h-8 relative" href="/cart">
-        <div className="absolute bg-orange-600 -right-2 -top-1 w-6 h-6 text-center rounded-full">
-          0
-        </div>
+        {cartSize >= 1 ? (
+          <div className="absolute bg-orange-600 -right-2 -top-1 w-6 h-6 text-center rounded-full">
+            {cartSize}
+          </div>
+        ) : (
+          ""
+        )}
         <FontAwesomeIcon icon={faCartShopping} />
       </Link>
     </nav>

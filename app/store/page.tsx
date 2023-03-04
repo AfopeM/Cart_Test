@@ -1,7 +1,6 @@
 "use client";
-
-import items from "@/data/items.json";
 import { StoreItems } from "@/component";
+import items from "@/data/items.json";
 
 export default function Store() {
   return (

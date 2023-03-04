@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import { Barlow_Condensed } from "@next/font/google";
 import { Navbar } from "@/component";
-import { ShoppingCartProvider } from "@/context/ShoppingCartContext";
+import Providers from "../GlobalRedux/provider";
 
 const Bar = Barlow_Condensed({
   subsets: ["latin"],
@@ -9,11 +9,8 @@ const Bar = Barlow_Condensed({
   variable: "--font-base",
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+//prettier-ignore
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={Bar.variable}>
       {/*
@@ -22,10 +19,11 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <ShoppingCartProvider>
-          <Navbar />
+        <Providers>
+         <Navbar />
           {children}
-        </ShoppingCartProvider>
+        </Providers>
+
       </body>
     </html>
   );
